@@ -1,12 +1,22 @@
-from crewai_tools import BaseTool
+from pydantic import BaseModel, Field
 
+    
+class Activity(BaseModel):
+    name: str = Field(..., description="The name of the activity")
+    description: str = Field(..., description="A description of the activity")
+    location: str = Field(..., description="The location of the activity")
+    date: str = Field(..., description="The date of the activity")
+    cuisine: str = Field(..., description="The cuisine of the activity")
+    why_its_suitable: str = Field(..., description="Why it's suitable for the user")
+    rating: str = Field(..., description="The rating of the activity")
+    reviews: str = Field(..., description="The reviews of the activity")
 
-class MyCustomTool(BaseTool):
-    name: str = "Name of my tool"
-    description: str = (
-        "Clear description for what this tool is useful for, you agent will need this information to use it."
-    )
+class DayPlan(BaseModel):
+    date: str = Field(..., description="The date of the day plan")
+    activities: List[Activity] = Field(..., description="The activities of the day plan")
+    restaurants: List[str] = Field(..., description="The restaurants of the day plan")
 
-    def _run(self, argument: str) -> str:
-        # Implementation goes here
-        return "this is an example of a tool output, ignore it and move along."
+class Itinerary(BaseModel):
+    days: List[DayPlan] = Field(..., description="The day plans of the trip")
+    name: str = Field(..., description="The name of the itinerary")
+    hotel: str = Field(..., description="The hotel of the itinerary")

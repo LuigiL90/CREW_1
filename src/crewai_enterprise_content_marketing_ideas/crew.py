@@ -1,8 +1,11 @@
 from crewai import Agent, Crew, Process, Task
 from crewai.project import CrewBase, agent, crew, task
 from crewai_tools import SerperDevTool, ScrapeWebsiteTool
-from typing import List
-from custom_tool import *
+from tools.custom_tool import *
+
+import os
+from dotenv import load_dotenv
+load_dotenv()
 
 @CrewBase
 class SurpriseTravelCrew():

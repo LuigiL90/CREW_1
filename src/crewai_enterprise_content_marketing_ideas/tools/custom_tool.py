@@ -1,5 +1,5 @@
 from pydantic import BaseModel, Field
-
+from typing import List, Optional
     
 class Activity(BaseModel):
     name: str = Field(..., description="The name of the activity")

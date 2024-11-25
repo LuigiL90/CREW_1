@@ -19,6 +19,7 @@ personalized_activity_planning_task:
     - how long is the trip: {trip_duration}
 
     - when will the trip start and end: {trip_dates}
+
     - preferred activities: {activities}
   expected_output: >
     A list of recommended activities and events for each day of the trip. The preferred
@@ -49,6 +50,7 @@ restaurant_scouting_task:
     - how long is the trip: {trip_duration}
 
     - when will the trip start and end: {trip_dates}
+    
     - preferred activities: {activities}
   expected_output: >
     A list of recommended restaurants, scenic locations, and fun activities for each day of the trip.

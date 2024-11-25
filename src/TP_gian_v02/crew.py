@@ -2,10 +2,19 @@ from crewai import Agent, Crew, Process, Task
 from crewai.project import CrewBase, agent, crew, task
 from crewai_tools import SerperDevTool, ScrapeWebsiteTool
 from tools.custom_tool import *
+from crewai import Agent, Crew, Process, Task, LLM
 
 import os
 from dotenv import load_dotenv
 load_dotenv()
+
+llm = LLM(
+
+   model="gpt-4o-mini",
+
+   temperature=0.2,
+
+)
 
 @CrewBase
 class SurpriseTravelCrew():
@@ -21,6 +30,7 @@ class SurpriseTravelCrew():
             tools=[SerperDevTool(), ScrapeWebsiteTool() ],
             verbose=True,
             allow_delegation=False,
+            llm=llm,
         )
     
     @agent
@@ -30,6 +40,7 @@ class SurpriseTravelCrew():
             tools=[SerperDevTool(), ScrapeWebsiteTool()],
             verbose=True,
             allow_delegation=False,
+            llm=llm,
         )
     
     @agent
@@ -39,6 +50,7 @@ class SurpriseTravelCrew():
             tools=[SerperDevTool(), ScrapeWebsiteTool()],
             verbose = True,
             allow_delegation=True,
+            llm=llm,
         )
     
     @agent
@@ -48,6 +60,7 @@ class SurpriseTravelCrew():
             tools=[SerperDevTool()],
             verbose=True,
             allow_delegation=False,
+            llm=llm,
         )
     
     @task

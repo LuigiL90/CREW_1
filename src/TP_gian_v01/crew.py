@@ -49,15 +49,6 @@ class SurpriseTravelCrew():
             verbose=True,
             allow_delegation=False,
         )
-    
-    @agent
-    def translator(self) -> Agent:
-        return Agent(
-            config=self.agents_config['translator'],
-            tools=[SerperDevTool()],
-            verbose = True,
-            allow_delegation=False,
-        )
 
     @task
     def personalized_activity_planning_task(self) -> Task:
@@ -86,14 +77,6 @@ class SurpriseTravelCrew():
             config=self.tasks_config['itinerary_compilation_task'],
             agent=self.itinerary_compiler(),
             human_input=True,
-            output_json=Itinerary
-        )
-
-    @task
-    def translator_task(self) -> Task:
-        return Task(
-            config=self.tasks_config['translator_task'],
-            agent=self.translator(),
         )
 
     @crew

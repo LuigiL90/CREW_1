@@ -1,0 +1,11 @@
+{
+          "origin": "Rome",
+          "destination": "Bari",
+          "age": "29",
+          "hotel_location": "Bari",
+          "hotel_name": "Nicolaus Hotel",
+          "trip_duration": "4 days",
+          "trip_dates": "23.11.2024 - 26.11.2024",
+          "activities":"hiking, visitng church",
+          "language": "italian"
+}

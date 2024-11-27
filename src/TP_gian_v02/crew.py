@@ -12,7 +12,7 @@ llm = LLM(
 
    model="gpt-4o-mini",
 
-   temperature=0.2,
+   temperature=0.9,
 
 )
 
@@ -24,6 +24,15 @@ class SurpriseTravelCrew():
     tasks_config = 'config/tasks.yaml'
 
     @agent
+    def manager(self) -> Agent:
+        return Agent(
+            config=self.agents_config['manager'],
+            verbose=True,
+            allow_delegation=True,
+            llm=llm,
+        ) 
+
+    @agent
     def personalized_activity_planner(self) -> Agent:
         return Agent(
             config=self.agents_config['personalized_activity_planner'],
@@ -31,7 +40,7 @@ class SurpriseTravelCrew():
             verbose=True,
             allow_delegation=False,
             llm=llm,
-        )
+        )   
     
     @agent
     def restaurant_scout(self) -> Agent:
@@ -49,7 +58,7 @@ class SurpriseTravelCrew():
             config=self.agents_config['weather_forecast'],
             tools=[SerperDevTool(), ScrapeWebsiteTool()],
             verbose = True,
-            allow_delegation=True,
+            allow_delegation=False,
             llm=llm,
         )
     
@@ -62,7 +71,7 @@ class SurpriseTravelCrew():
             allow_delegation=False,
             llm=llm,
         )
-    
+       
     @task
     def personalized_activity_planning_task(self) -> Task:
         return Task(
@@ -83,7 +92,8 @@ class SurpriseTravelCrew():
             config=self.tasks_config['weather_forecast_task'],
             agent=self.weather_forecast(),
         )
-
+        
+ 
     @task
     def itinerary_compilation_task(self) -> Task:
         return Task(
@@ -98,9 +108,15 @@ class SurpriseTravelCrew():
     def crew(self) -> Crew:
         """Creates a SurpriseTravel Crew"""
         return Crew(
-            agents=self.agents,
+            agents=[
+                self.weather_forecast(),
+                self.personalized_activity_planner(),
+                self.restaurant_scout(),
+                self.itinerary_compiler(),
+            ], 
             tasks=self.tasks,
-            process=Process.sequential,
+            manager_agent=self.manager(),
+            process=Process.hierarchical,
             verbose=True,
-            json_dict = True,
+            planning=True,
         )

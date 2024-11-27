@@ -575,17 +575,6 @@ tools = [
 ]
 
 [[package]]
-name = "crewai-enterprise-content-marketing-ideas"
-version = "0.1.0"
-source = { editable = "." }
-dependencies = [
-    { name = "crewai", extra = ["tools"] },
-]
-
-[package.metadata]
-requires-dist = [{ name = "crewai", extras = ["tools"], specifier = ">=0.76.2" }]
-
-[[package]]
 name = "crewai-tools"
 version = "0.13.2"
 source = { registry = "https://pypi.org/simple" }
@@ -3717,6 +3706,17 @@ sdist = { url = "https://files.pythonhosted.org/packages/d4/19/b65f1a088ee23e37c
 wheels = [
     { url = "https://files.pythonhosted.org/packages/c4/ac/ce90573ba446a9bbe65838ded066a805234d159b4446ae9f8ec5bbd36cbd/tomli_w-1.1.0-py3-none-any.whl", hash = "sha256:1403179c78193e3184bfaade390ddbd071cba48a32a2e62ba11aae47490c63f7", size = 6440 },
 ]
+
+[[package]]
+name = "tp-gian-v02"
+version = "0.1.0"
+source = { editable = "." }
+dependencies = [
+    { name = "crewai", extra = ["tools"] },
+]
+
+[package.metadata]
+requires-dist = [{ name = "crewai", extras = ["tools"], specifier = ">=0.76.2" }]
 
 [[package]]
 name = "tqdm"

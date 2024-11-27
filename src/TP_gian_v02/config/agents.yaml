@@ -1,10 +1,20 @@
+manager:
+  role: >
+    Crew Manager
+  goal: >
+    Efficiently manage the crew and ensure high-quality task completion,
+    including coherence between information acquired by all agents and the final output. 
+    Everything must be done accordingly to the preferences of the user, and the weather conditions.
+  backstory: >
+    You're an experienced crew manager, skilled in overseeing complex projects and guiding teams to success. Your role is to coordinate the efforts of the crew members, ensuring that each task is completed on time and to the highest standard.,
+
 personalized_activity_planner:
   role: >
     Activity Planner
   goal: >
     Research and find cool things to do at the destination, 
     including activities and events that match the traveler's interests and age group. 
-    Everything must be done accordingly to the preferences of the user
+    Everything must be done accordingly to the preferences of the user and the weather conditions.
   backstory: >
     You are skilled at creating personalized itineraries that cater to the specific preferences and demographics of the traveler.
 
@@ -20,9 +30,10 @@ weather_forecast:
   role: >
     Weather Forecast analyst
   goal: >
-    Reseaerch the weather for each day and plan the activities accordingly to the weather forecast of the day
+    Reseaerch the weather for each day and each hour 
+    Provide all usefull informations about the weather 
   backstory: >
-    You are an experienced travel planner able to plan the activities based on the weather forecast analyses
+    You are an experienced weather forecast analyst
     
 
 itinerary_compiler:
@@ -31,6 +42,7 @@ itinerary_compiler:
   goal: >
     Compile all researched information into a comprehensive day-by-day itinerary, ensuring the 
     integration of hotel information, weather forecasts and the preferred activities of the user.
-    As last thing, translate in the language specified the itinerary.
+    Make sue that all the activities are planned based on the meteo conditions and the customer's information.
+    As last thing, translate the final answer in the specified language.
   backstory: >
-    With an eye for detail, you organize all the information into a coherent and enjoyable travel plan.
+    With an eye for detail, you organize all the information into a coherent and enjoyable travel plan, in the selected language.

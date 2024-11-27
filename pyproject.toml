@@ -1,24 +1,25 @@
 [project]
-name = "crewai_enterprise_content_marketing_ideas"
+name = "tp_gian_v02"  # Updated to reflect your project folder name
 version = "0.1.0"
-description = "crewai-enterprise-content-marketing using crewAI"
+description = "CrewAI-based project for enterprise content marketing ideas"  # Updated description
 authors = [
-    { name = "Your Name", email = "you@example.com" },
+    { name = "Your Name", email = "you@example.com" },  # Ensure you update with actual details
 ]
 requires-python = ">=3.10,<=3.13"
 dependencies = [
-    "crewai[tools]>=0.76.2",
+    "crewai[tools]>=0.76.2",  # Dependency remains the same
 ]
 
 [project.scripts]
-crewai_enterprise_content_marketing_ideas = "crewai_enterprise_content_marketing_ideas.main:run"
-run_crew = "crewai_enterprise_content_marketing_ideas.main:run"
-train = "crewai_enterprise_content_marketing_ideas.main:train"
-replay = "crewai_enterprise_content_marketing_ideas.main:replay"
-test = "crewai_enterprise_content_marketing_ideas.main:test"
+tp_gian_v02 = "tp_gian_v02.main:run"  # Updated to match the folder name
+run_crew = "tp_gian_v02.main:run"  # Consistent with project folder
+train = "tp_gian_v02.main:train"
+replay = "tp_gian_v02.main:replay"
+test = "tp_gian_v02.main:test"
 
 [build-system]
 requires = [
     "hatchling",
 ]
 build-backend = "hatchling.build"
+

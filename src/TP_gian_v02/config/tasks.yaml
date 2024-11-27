@@ -60,7 +60,7 @@ restaurant_scouting_task:
 
 weather_forecast_task:
   description: >
-    Search online to find the weather forecast for each day and then analyze if the daily activities make sense or must be modified accordingly to the forecast
+    Search online to find the weather forecast for each day and hour accordin to the time span in {trip_dates} 
   expected_output: >
     An effective analysis on the weather forecast to be used by the itinerary agent in order to make an effective itinerary based on the information acquired
 
@@ -68,11 +68,12 @@ itinerary_compilation_task:
   description: >
     Compile all researched information into a comprehensive day-by-day itinerary for the trip to {destination}.
     Ensure the itinerary integrates hotel information, all planned activities and dining experiences.
+    Analyze if the daily activities make sense or must be modified accordingly to the forecast
     Use text formatting and document creation tools to organize the information.
     Traveler's information:
 
     - language: {language}
   expected_output: >
     A detailed itinerary document, the itinerary should include a day-by-day
-    plan with hotel details, activities, restaurants, and scenic locations. Lastly, 
-    translate in the langiage {language} of the user, the itinerary.
+    plan with hotel details, activities, restaurants, and scenic locations, according to the time span in {trip_dates}. 
+    Lastly, translate the final answer in the language {language} of the user

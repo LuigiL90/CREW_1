@@ -3,6 +3,8 @@ from crewai.project import CrewBase, agent, crew, task
 from crewai_tools import SerperDevTool, ScrapeWebsiteTool
 from tools.custom_tool import *
 from crewai import Agent, Crew, Process, Task, LLM
+from langchain_openai import ChatOpenAI
+from tools.calculation_tool import CalculationInput
 
 import os
 from dotenv import load_dotenv
@@ -16,6 +18,7 @@ llm = LLM(
 
 )
 
+
 @CrewBase
 class SurpriseTravelCrew():
     """Surprise Travel Crew"""
@@ -24,21 +27,12 @@ class SurpriseTravelCrew():
     tasks_config = 'config/tasks.yaml'
 
     @agent
-    def manager(self) -> Agent:
-        return Agent(
-            config=self.agents_config['manager'],
-            verbose=True,
-            allow_delegation=True,
-            llm=llm,
-        ) 
-
-    @agent
     def personalized_activity_planner(self) -> Agent:
         return Agent(
             config=self.agents_config['personalized_activity_planner'],
-            tools=[SerperDevTool(), ScrapeWebsiteTool() ],
+            tools=[SerperDevTool(), ScrapeWebsiteTool()],
             verbose=True,
-            allow_delegation=False,
+            allow_delegation=True,
             llm=llm,
         )   
     
@@ -68,9 +62,18 @@ class SurpriseTravelCrew():
             config=self.agents_config['itinerary_compiler'],
             tools=[SerperDevTool()],
             verbose=True,
-            allow_delegation=False,
+            allow_delegation=True,
             llm=llm,
         )
+    
+    def use_calculation_tool(self, operation: str, factor: float) -> str:
+        """
+        This method will be called dynamically when the CalculationInput tool needs to be invoked.
+        It simulates the process of performing a calculation.
+        """
+        calculation_input = CalculationInput(operation=operation, factor=factor)
+        result = perform_calculation(operation=calculation_input.operation, factor=calculation_input.factor)
+        return result
        
     @task
     def personalized_activity_planning_task(self) -> Task:
@@ -93,20 +96,19 @@ class SurpriseTravelCrew():
             agent=self.weather_forecast(),
         )
         
- 
     @task
     def itinerary_compilation_task(self) -> Task:
         return Task(
             config=self.tasks_config['itinerary_compilation_task'],
             agent=self.itinerary_compiler(),
             human_input=True,
+            memory=True,
             output_json=Itinerary,
         )
     
-
     @crew
     def crew(self) -> Crew:
-        """Creates a SurpriseTravel Crew"""
+        """Itinerary planner (crew_1)"""
         return Crew(
             agents=[
                 self.weather_forecast(),
@@ -115,8 +117,9 @@ class SurpriseTravelCrew():
                 self.itinerary_compiler(),
             ], 
             tasks=self.tasks,
-            manager_agent=self.manager(),
-            process=Process.hierarchical,
+            #manager_llm=ChatOpenAI(temperature=0, model="gpt-4o-mini"),
+            process=Process.sequential,
+            respect_context_window=True,
             verbose=True,
             planning=True,
         )

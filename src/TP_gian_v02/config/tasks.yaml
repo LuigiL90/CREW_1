@@ -1,79 +1,81 @@
 personalized_activity_planning_task:
   description: >
-    Research and find cool things to do at {destination}.
-    Focus on activities and events that match the traveler's interests and age group.
-    Utilize internet search tools and recommendation engines to gather the information.
-
+    Research and identify activities at {destination} that match the traveler's 
+    preferences and demographic profile. Collaborate with the weather forecast agent 
+    to ensure activities are weather-appropriate. Share the findings with the itinerary 
+    compiler for inclusion in the final itinerary.
 
     Traveler's information:
-
-
     - origin: {origin}
-
     - destination: {destination}
-
     - age of the traveler: {age}
-
+    - number of people: {person}
     - hotel location: {hotel_location}
-
-    - how long is the trip: {trip_duration}
-
-    - when will the trip start and end: {trip_dates}
-
+    - trip duration: {trip_duration}
+    - trip dates: {trip_dates}
     - preferred activities: {activities}
   expected_output: >
-    A list of recommended activities and events for each day of the trip. The preferred
-    {activities} have to be taken into account when choosing the activities to do.
-    Each entry should include the activity name, location, a brief description, and why it's suitable for the traveler.
-    And potential reviews and ratings of the activities.
-    Each entry should be coherent to the date of arrival and departure.
-  
+    A list of recommended activities and events, including:
+    - Activity name, description, and why it's suitable for the traveler
+    - Location/address and any available ratings or reviews
+    - Weather suitability for the activity
+    Pass all results to the itinerary compiler.
 
 restaurant_scouting_task:
   description: >
-    Find highly-rated restaurants and dining experiences at {destination}.
-    Recommend scenic locations and fun activities that align with the traveler's preferences.
-    Use internet search tools, restaurant review sites, and travel guides.
-    Make sure to find a variety of options to suit different tastes and budgets, and ratings for them.
+    Investigate the culinary scene at {destination}. Research and recommend 
+    restaurants that match the traveler's preferences and budget. Provide options 
+    that align with planned activities and weather conditions.
 
     Traveler's information:
-
-
     - origin: {origin}
-
     - destination: {destination}
-
     - age of the traveler: {age}
-
+    - number of people: {person}
     - hotel location: {hotel_location}
-
-    - how long is the trip: {trip_duration}
-
-    - when will the trip start and end: {trip_dates}
-    
+    - trip duration: {trip_duration}
+    - trip dates: {trip_dates}
     - preferred activities: {activities}
   expected_output: >
-    A list of recommended restaurants, scenic locations, and fun activities for each day of the trip.
-    Each entry should include the name, location (address), type of cuisine or activity, and a brief description and ratings.
-    Each entry should be coherent to the date of arrival and departure.
-    Also, each entry should be coherent with the preferred activities of the user.
+    A list of recommended restaurants, including:
+    - Name, type of cuisine, and a brief description of the menu
+    - Location/address and available ratings or reviews
+    - Suitability for different days of the trip based on activities and weather
+    Share findings with the itinerary compiler.
 
 weather_forecast_task:
   description: >
-    Search online to find the weather forecast for each day and hour accordin to the time span in {trip_dates} 
+    Research and provide detailed weather forecasts for {trip_dates}. Include 
+    hourly and daily weather conditions to inform activity and dining schedules.
   expected_output: >
-    An effective analysis on the weather forecast to be used by the itinerary agent in order to make an effective itinerary based on the information acquired
+    A comprehensive weather report including:
+    - Hourly and daily forecasts for {trip_dates}
+    - Expected temperatures, precipitation, and other relevant details
+    Share results with the personalized activity planner and itinerary compiler.
 
 itinerary_compilation_task:
   description: >
-    Compile all researched information into a comprehensive day-by-day itinerary for the trip to {destination}.
-    Ensure the itinerary integrates hotel information, all planned activities and dining experiences.
-    Analyze if the daily activities make sense or must be modified accordingly to the forecast
-    Use text formatting and document creation tools to organize the information.
-    Traveler's information:
+    Compile a detailed trip plan using only the data provided by other agents. Ensure 
+    all information is integrated into a seamless day-by-day itinerary, translated 
+    into {language}.
+    Mandatory: use only the informations acquired by the other agents, do not search on the internet. 
 
+    Traveler's information:
+    - origin: {origin}
+    - destination: {destination}
+    - trip dates: {trip_dates}
+    - interests: {activities}
+    - number of people: {person}
     - language: {language}
   expected_output: >
-    A detailed itinerary document, the itinerary should include a day-by-day
-    plan with hotel details, activities, restaurants, and scenic locations, according to the time span in {trip_dates}. 
-    Lastly, translate the final answer in the language {language} of the user
+    A markdown-formatted itinerary including:
+    - Trip Summary: Overview of the trip
+    - Travel Highlights: Key attractions and experiences
+    - Daily Itinerary: Detailed schedule with activities, dining, and weather info
+    - Local Cuisine: Recommended restaurants and culinary experiences
+    - Addresses: Exact addresses for all activities and restaurants
+    - Weather: Weather forecast for each day
+    - Budget: Estimated costs for activities and dining
+    - Cost Saving Tips: Suggestions for saving money
+    - Additional Tips: Travel advice and recommendations
+    Translate the document into the specified language: {language}.

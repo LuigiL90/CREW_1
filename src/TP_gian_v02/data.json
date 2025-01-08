@@ -1,11 +1,12 @@
 {
-          "origin": "Rome",
+          "origin": "Padova",
           "destination": "Bari",
-          "age": "21",
+          "age": "21, 23, 19, 24",
+          "person": "4",
           "hotel_location": "Bari",
           "hotel_name": "Nicolaus Hotel",
           "trip_duration": "4 days",
-          "trip_dates": "30.11.2024 - 03.12.2024",
-          "activities":"hiking, visitng churches, local attractions",
+          "trip_dates": "14.12.2024 - 18.12.2024",
+          "activities":"local pubs and lounge bars, night life, local attractions",
           "language": "italian"
 }
